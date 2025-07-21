@@ -1,0 +1,18 @@
+<h2>Trade Stock</h2>
+<form (ngSubmit)="submitTrade()">
+  <input [(ngModel)]="newTrade.symbol" name="symbol" placeholder="Symbol" required>
+  <select [(ngModel)]="newTrade.type" name="type">
+    <option value="buy">Buy</option>
+    <option value="sell">Sell</option>
+  </select>
+  <input type="number" [(ngModel)]="newTrade.quantity" name="quantity" required>
+  <input type="number" [(ngModel)]="newTrade.price" name="price" required>
+  <button type="submit">Submit</button>
+</form>
+
+<h3>Trade History</h3>
+<ul>
+  <li *ngFor="let t of trades">
+    {{ t.date | date:'short' }} - {{ t.type.toUpperCase() }} {{ t.quantity }}x {{ t.symbol }} @ ${{ t.price }}
+  </li>
+</ul>

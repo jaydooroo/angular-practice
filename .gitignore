@@ -8,8 +8,20 @@
 
 # Node
 /node_modules
+**/node_modules
 npm-debug.log
 yarn-error.log
+
+# Ignore log files
+**/*.log
+
+# Ignore environment files
+.env
+**/.env
+
+# Ignore build output
+dist/
+build/
 
 # IDEs and editors
 .idea/
