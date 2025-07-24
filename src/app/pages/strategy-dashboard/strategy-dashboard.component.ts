@@ -63,4 +63,8 @@ export class StrategyDashboardComponent implements OnInit {
         }
       });
   }
+
+  navigateToCreateStrategy() {
+    this.router.navigate(['/create-strategy']);
+  }
 }

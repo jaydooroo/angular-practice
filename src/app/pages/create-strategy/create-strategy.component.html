@@ -1,0 +1,159 @@
+<div class="create-strategy">
+  <div class="strategy-form-container">
+    <div class="form-header">
+      <h1 class="form-title">Create New Strategy</h1>
+      <p class="form-subtitle">Define a new investment strategy with your custom parameters</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #strategyForm="ngForm" class="strategy-form">
+      <div class="form-group">
+        <label for="name" class="form-label">Strategy Name</label>
+        <input 
+          type="text" 
+          id="name"
+          name="name"
+          class="form-input"
+          [(ngModel)]="strategy.name"
+          #name="ngModel"
+          required
+          placeholder="Enter strategy name">
+        <div *ngIf="name.invalid && name.touched" class="error-message">
+          Strategy name is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description" class="form-label">Description</label>
+        <textarea 
+          id="description"
+          name="description"
+          class="form-textarea"
+          [(ngModel)]="strategy.description"
+          #description="ngModel"
+          required
+          rows="4"
+          placeholder="Describe your investment strategy..."></textarea>
+        <div *ngIf="description.invalid && description.touched" class="error-message">
+          Description is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="riskLevel" class="form-label">Risk Level</label>
+        <select 
+          id="riskLevel"
+          name="riskLevel"
+          class="form-select"
+          [(ngModel)]="strategy.riskLevel"
+          required>
+          <option value="low">Low Risk</option>
+          <option value="medium">Medium Risk</option>
+          <option value="high">High Risk</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half-width">
+          <label for="avgProfit" class="form-label">Average Profit Percentage</label>
+          <input 
+            type="number" 
+            id="avgProfit"
+            name="avgProfit"
+            class="form-input"
+            [(ngModel)]="strategy.avgProfitPercentage"
+            #avgProfit="ngModel"
+            required
+            min="0"
+            step="0.1"
+            placeholder="15.5">
+          <div *ngIf="avgProfit.invalid && avgProfit.touched" class="error-message">
+            Valid percentage is required
+          </div>
+        </div>
+
+        <div class="form-group half-width">
+          <label for="largestDrop" class="form-label">Largest Drop Percentage</label>
+          <input 
+            type="number" 
+            id="largestDrop"
+            name="largestDrop"
+            class="form-input"
+            [(ngModel)]="strategy.largestDropPercentage"
+            #largestDrop="ngModel"
+            required
+            min="0"
+            step="0.1"
+            placeholder="8.2">
+          <div *ngIf="largestDrop.invalid && largestDrop.touched" class="error-message">
+            Valid percentage is required
+          </div>
+        </div>
+      </div>
+
+      <div class="historical-data-section">
+        <h3 class="section-title">Historical Data (Optional)</h3>
+        
+        <div class="form-row">
+          <div class="form-group third-width">
+            <label for="bestYear" class="form-label">Best Year (%)</label>
+            <input 
+              type="number" 
+              id="bestYear"
+              name="bestYear"
+              class="form-input"
+              [(ngModel)]="historicalData.bestYear"
+              step="0.1"
+              placeholder="25.3">
+          </div>
+
+          <div class="form-group third-width">
+            <label for="worstYear" class="form-label">Worst Year (%)</label>
+            <input 
+              type="number" 
+              id="worstYear"
+              name="worstYear"
+              class="form-input"
+              [(ngModel)]="historicalData.worstYear"
+              step="0.1"
+              placeholder="-12.5">
+          </div>
+
+          <div class="form-group third-width">
+            <label for="yearsActive" class="form-label">Years Active</label>
+            <input 
+              type="number" 
+              id="yearsActive"
+              name="yearsActive"
+              class="form-input"
+              [(ngModel)]="historicalData.yearsActive"
+              min="1"
+              placeholder="10">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button 
+          type="button" 
+          class="btn btn-secondary"
+          (click)="goBack()">
+          Cancel
+        </button>
+        <button 
+          type="submit" 
+          class="btn btn-primary"
+          [disabled]="strategyForm.invalid || isLoading">
+          {{ isLoading ? 'Creating...' : 'Create Strategy' }}
+        </button>
+      </div>
+    </form>
+
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-error">
+      {{ errorMessage }}
+    </div>
+  </div>
+</div>

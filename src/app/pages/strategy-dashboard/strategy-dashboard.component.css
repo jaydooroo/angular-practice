@@ -26,8 +26,34 @@
 }
 
 .dashboard-header {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 50px;
+}
+
+.title-section {
+  text-align: center;
+  flex: 1;
+}
+
+.create-strategy-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+  white-space: nowrap;
+}
+
+.create-strategy-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
 }
 
 .dashboard-title {
@@ -298,6 +324,11 @@
 .strategy-card:nth-child(3) { animation-delay: 0.3s; }
 
 @media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
   .dashboard-title {
     font-size: 2.5rem;
   }

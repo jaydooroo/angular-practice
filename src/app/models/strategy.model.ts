@@ -12,4 +12,8 @@ export interface Strategy {
     worstYear: number;
     yearsActive: number;
   };
+  stockWeights?: {
+    symbol: string;
+    weight: number;
+  }[];
 }

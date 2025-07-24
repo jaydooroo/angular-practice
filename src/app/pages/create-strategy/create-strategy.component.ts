@@ -21,7 +21,13 @@ export class CreateStrategyComponent implements OnInit {
         description: '', 
         riskLevel: 'low', 
         avgProfitPercentage: 0, 
-        largestDropPercentage: 0, 
+        largestDropPercentage: 0
+     };
+
+     historicalData = {
+        bestYear: null as number | null,
+        worstYear: null as number | null,
+        yearsActive: null as number | null
      }; 
 
      isLoading = false; 
@@ -61,8 +67,25 @@ export class CreateStrategyComponent implements OnInit {
     onSubmit() {
         this.isLoading = true;
         this.errorMessage = '';
+        this.successMessage = '';
 
-        this.strategyService.createStrategy(this.strategy).subscribe({
+        // Prepare strategy data for backend
+        const strategyToSubmit = { ...this.strategy };
+        
+        // Only include historicalData if at least one field has a value
+        const hasHistoricalData = this.historicalData.bestYear !== null || 
+                                 this.historicalData.worstYear !== null || 
+                                 this.historicalData.yearsActive !== null;
+        
+        if (hasHistoricalData) {
+            strategyToSubmit.historicalData = {
+                bestYear: this.historicalData.bestYear || 0,
+                worstYear: this.historicalData.worstYear || 0,
+                yearsActive: this.historicalData.yearsActive || 0
+            };
+        }
+
+        this.strategyService.createStrategy(strategyToSubmit).subscribe({
             next: (createdStrategy) => {
                 console.log('Strategy created successfully:', createdStrategy);
                 this.successMessage = 'Strategy created successfully!';
@@ -77,6 +100,10 @@ export class CreateStrategyComponent implements OnInit {
                 this.isLoading = false;
             }
         });
+    }
+
+    goBack() {
+        this.router.navigate(['/strategies']);
     }
 
 

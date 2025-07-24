@@ -106,7 +106,8 @@ exports.postStrategy = async (req, res) => {
 
     const savedStrategy = await newStrategy.save(); 
 
-    res.status(201),json(savedStrategy); 
+
+    return res.status(201).json(savedStrategy); 
   }
   catch (error) {
     // Handle Validation errors
@@ -123,9 +124,8 @@ exports.postStrategy = async (req, res) => {
         error: 'Duplicate entry', 
         details: 'A strategy with this name alreay exists'
       }); 
-
-    res.status(500).json({error: error.message});
     }
+    res.status(500).json({error: error.message});
   }
 };
 async function createDefaultStrategies() {

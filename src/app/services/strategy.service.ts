@@ -21,7 +21,7 @@ export class StrategyService {
     });
   }
 
-  createStrategy (strategy: Strategy) {
+  createStrategy (strategy: Strategy): Observable<Strategy> {
     return this.http.post<Strategy>(this.apiUrl, strategy);  
   }
 

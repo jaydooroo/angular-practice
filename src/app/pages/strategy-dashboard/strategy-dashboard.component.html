@@ -1,8 +1,13 @@
 <div class="strategy-dashboard">
   <div class="dashboard-content">
     <div class="dashboard-header">
-      <h1 class="dashboard-title">AI Investment Strategies</h1>
-      <p class="dashboard-subtitle">Discover intelligent portfolio recommendations tailored to your investment goals and risk tolerance</p>
+      <div class="title-section">
+        <h1 class="dashboard-title">AI Investment Strategies</h1>
+        <p class="dashboard-subtitle">Discover intelligent portfolio recommendations tailored to your investment goals and risk tolerance</p>
+      </div>
+      <button class="create-strategy-btn" (click)="navigateToCreateStrategy()">
+        + Create New Strategy
+      </button>
     </div>
     
     <div class="investment-section">
