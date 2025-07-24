@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "npm run client",
+    "start_all": "concurrently \"npm run server\" \"npm run client\"",
     "server": "node backend/server.js",
     "client": "ng serve",
     "build": "ng build",

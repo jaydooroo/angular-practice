@@ -1,0 +1,96 @@
+<div class="portfolio-results" *ngIf="recommendation">
+  <div class="results-content">
+    <div class="header">
+      <button class="back-btn" (click)="backToStrategies()">
+        ← Back to Strategies
+      </button>
+      <h1 class="page-title">Portfolio Analysis</h1>
+    </div>
+
+    <div class="strategy-summary">
+      <div class="summary-card">
+        <h2 class="strategy-name">{{ recommendation.strategyName }}</h2>
+        <div class="summary-stats">
+          <div class="stat-card">
+            <div class="stat-label">Total Investment</div>
+            <div class="stat-value">${{ recommendation.totalInvestment | number }}</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Risk Level</div>
+            <div class="stat-value">
+              <span 
+                class="risk-badge"
+                [style.background-color]="getRiskColor(recommendation.strategyStats.riskLevel)">
+                {{ recommendation.strategyStats.riskLevel.toUpperCase() }}
+              </span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Expected Return</div>
+            <div class="stat-value positive">+{{ recommendation.strategyStats.avgProfitPercentage }}%</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Max Drop</div>
+            <div class="stat-value negative">{{ recommendation.strategyStats.largestDropPercentage }}%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="allocations-section">
+      <h2 class="section-title">Stock Allocations</h2>
+      
+      <div class="allocations-container">
+        <div class="table-header">
+          <div>Stock</div>
+          <div>Company</div>
+          <div>Sector</div>
+          <div>Amount</div>
+          <div>Shares</div>
+          <div>Portfolio %</div>
+          <div>Price</div>
+        </div>
+        
+        <div class="table-row" *ngFor="let stock of recommendation.stockAllocations">
+          <div class="stock-symbol">{{ stock.symbol }}</div>
+          <div class="company-name">{{ stock.companyName }}</div>
+          <div>
+            <span class="sector-tag">{{ stock.sector || 'N/A' }}</span>
+          </div>
+          <div class="investment-amount">${{ stock.investmentAmount | number }}</div>
+          <div class="shares-count">{{ stock.sharesCount }}</div>
+          <div class="percentage-container">
+            <div class="percentage-bar">
+              <div 
+                class="percentage-fill" 
+                [style.width.%]="stock.allocationPercentage">
+              </div>
+              <span class="percentage-text">{{ stock.allocationPercentage }}%</span>
+            </div>
+          </div>
+          <div class="current-price">${{ stock.currentPrice | number }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-summary">
+      <div class="summary-item">
+        <span class="summary-label">Total Stocks</span>
+        <span class="summary-value">{{ recommendation.stockAllocations.length }}</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">Total Shares</span>
+        <span class="summary-value">{{ getTotalShares() }}</span>
+      </div>
+    </div>
+
+    <div class="action-panel">
+      <button class="execute-btn" (click)="executePortfolio()">
+        Execute Portfolio
+      </button>
+      <button class="save-btn" (click)="backToStrategies()">
+        Try Another Strategy
+      </button>
+    </div>
+  </div>
+</div>

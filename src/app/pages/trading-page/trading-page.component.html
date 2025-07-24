@@ -13,6 +13,6 @@
 <h3>Trade History</h3>
 <ul>
   <li *ngFor="let t of trades">
-    {{ t.date | date:'short' }} - {{ t.type.toUpperCase() }} {{ t.quantity }}x {{ t.symbol }} @ ${{ t.price }}
+    {{ t.date | date:'short' }} - {{ t.type.toUpperCase() }} {{ t.quantity }}x {{ t.symbol }} ${{ t.price }}
   </li>
 </ul>

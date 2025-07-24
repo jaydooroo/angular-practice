@@ -1,9 +1,8 @@
-nav a {
-  margin-right: 12px;
-  color: #007bff;
-  text-decoration: none;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-nav a.active {
-  font-weight: bold;
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f6ff 0%, #e8e2f5 20%, #d6cbea 40%, #c4b5df 60%, #b29ed4 80%, #a087c9 100%);
+  background-attachment: fixed;
 }

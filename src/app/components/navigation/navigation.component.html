@@ -1,0 +1,54 @@
+<nav class="navigation">
+  <div class="nav-container">
+    <!-- Logo/Brand -->
+    <div class="nav-brand" (click)="navigate('/strategy-dashboard')">
+      <div class="brand-icon">💎</div>
+      <div class="brand-text">
+        <span class="brand-name">TradePro</span>
+        <span class="brand-tagline">AI Investment Platform</span>
+      </div>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <div class="nav-links desktop-nav">
+      <div 
+        class="nav-item"
+        *ngFor="let item of navigationItems"
+        [class.active]="isActive(item.path)"
+        (click)="navigate(item.path)">
+        <div class="nav-icon">{{ item.icon }}</div>
+        <div class="nav-content">
+          <div class="nav-label">{{ item.label }}</div>
+          <div class="nav-description">{{ item.description }}</div>
+        </div>
+        <div class="nav-indicator" *ngIf="isActive(item.path)"></div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" (click)="toggleMobileMenu()">
+      <div class="hamburger" [class.active]="isMenuOpen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" [class.open]="isMenuOpen">
+    <div class="mobile-nav-content">
+      <div 
+        class="mobile-nav-item"
+        *ngFor="let item of navigationItems"
+        [class.active]="isActive(item.path)"
+        (click)="navigate(item.path)">
+        <div class="mobile-nav-icon">{{ item.icon }}</div>
+        <div class="mobile-nav-content-text">
+          <div class="mobile-nav-label">{{ item.label }}</div>
+          <div class="mobile-nav-description">{{ item.description }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

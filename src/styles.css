@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #f8f6ff 0%, #e8e2f5 20%, #d6cbea 40%, #c4b5df 60%, #b29ed4 80%, #a087c9 100%);
+  background-attachment: fixed;
+}

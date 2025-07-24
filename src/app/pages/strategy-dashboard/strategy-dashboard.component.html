@@ -1,0 +1,68 @@
+<div class="strategy-dashboard">
+  <div class="dashboard-content">
+    <div class="dashboard-header">
+      <h1 class="dashboard-title">AI Investment Strategies</h1>
+      <p class="dashboard-subtitle">Discover intelligent portfolio recommendations tailored to your investment goals and risk tolerance</p>
+    </div>
+    
+    <div class="investment-section">
+      <div class="investment-input">
+        <label class="investment-label" for="amount">Investment Amount</label>
+        <div class="investment-input-wrapper">
+          <input 
+            type="number" 
+            id="amount"
+            class="investment-amount"
+            [(ngModel)]="investmentAmount" 
+            min="100" 
+            step="100"
+            placeholder="10,000">
+        </div>
+      </div>
+    </div>
+
+    <div class="strategies-grid">
+      <div 
+        class="strategy-card" 
+        *ngFor="let strategy of strategies; let i = index"
+        [class.selected]="selectedStrategyId === strategy._id"
+        (click)="selectedStrategyId = strategy._id">
+        
+        <div class="strategy-header">
+          <h3 class="strategy-title">{{ strategy.name}} {{strategy._id }}</h3>
+          <span 
+            class="risk-badge" 
+            [style.background-color]="getRiskColor(strategy.riskLevel)">
+            {{ strategy.riskLevel.toUpperCase() }} RISK
+          </span>
+        </div>
+        
+        <p class="strategy-description">{{ strategy.description }}</p>
+        
+        <div class="strategy-stats">
+          <div class="stat">
+            <span class="stat-label">Avg Annual Return</span>
+            <span class="stat-value positive">+{{ strategy.avgProfitPercentage }}%</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Max Historical Drop</span>
+            <span class="stat-value negative">{{ strategy.largestDropPercentage }}%</span>
+          </div>
+          <div class="stat" *ngIf="strategy.historicalData">
+            <span class="stat-label">Track Record</span>
+            <span class="stat-value">{{ strategy.historicalData.yearsActive }} years</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-panel">
+      <button 
+        class="analyze-btn" 
+        [disabled]="!selectedStrategyId || investmentAmount <= 0 || loading"
+        (click)="analyzeStrategy()">
+        {{ loading ? 'Analyzing Portfolio...' : 'Generate Portfolio' }}
+      </button>
+    </div>
+  </div>
+</div>
